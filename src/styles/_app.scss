@@ -1,0 +1,30 @@
+// COMMON STYLES
+
+.title {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1;
+  text-align: center;
+}
+
+// PAGE
+
+.page {
+  padding: 2rem;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('../images/pizarra.jpeg');
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+// MAIN
+
+.main {
+  display: flex;
+  justify-content: center;
+}
