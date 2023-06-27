@@ -34,7 +34,7 @@ $dummyTransitionTime: 1s;
     color: $dummyDisabledColor;
     transition: color $dummyTransitionTime ease;
     &::before {
-      content: '×';
+      content: "×";
     }
   }
 

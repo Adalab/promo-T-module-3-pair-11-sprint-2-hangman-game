@@ -5,7 +5,7 @@
   &__input {
     background-color: transparent;
     border: none;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid white;
     text-align: center;
     font-size: 4rem;
     outline: none;
@@ -29,12 +29,12 @@
 
 @keyframes borderBottomInput {
   from {
-    border-bottom-color: black;
+    border-bottom-color: white;
   }
   50% {
     border-bottom-color: transparent;
   }
   to {
-    border-bottom-color: black;
+    border-bottom-color: white;
   }
 }
