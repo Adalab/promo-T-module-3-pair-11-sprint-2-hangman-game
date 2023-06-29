@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
+
 import Header from './Header';
 import Dummy from './Dummy';
 import SolutionLetters from './SolutionLetters';
 import ErrorLetters from './ErrorLetters';
+import Form from './Form';
+import Footer from './Footer';
+import Instructions from './pages/Instructions';
+import Options from './pages/Options';
+
 // api
 import getWordFromApi from '../services/api';
 // styles
@@ -28,17 +35,12 @@ function App() {
   };
 
   const handleChange = (ev) => {
-    let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/; //add regular pattern 
+    let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/; //add regular pattern
     if (re.test(ev.target.value) || ev.target.value === '') {
       handleLastLetter(ev.target.value);
     }
   };
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-  };
-
-  
   const handleLastLetter = (value) => {
     value = value.toLocaleLowerCase();
     setLastLetter(value);
@@ -52,7 +54,7 @@ function App() {
     const errorLetters = userLetters.filter(
       (letter) => word.includes(letter) === false
     );
-    let numberOfErrors = errorLetters.length
+    let numberOfErrors = errorLetters.length;
     return numberOfErrors;
   };
   return (
@@ -60,33 +62,28 @@ function App() {
       <Header />
       <main className='main'>
         <section>
-          <SolutionLetters
-          word={word}
-          userLetters={userLetters}/>
-          <ErrorLetters
-          word={word}
-          userLetters={userLetters}/>
-          <form className='form' onSubmit={handleSubmit}>
-            <label className='title' htmlFor='last-letter'>
-              Escribe una letra:
-            </label>
-            <input
-              autoFocus
-              autoComplete='off'
-              className='form__input'
-              maxLength='1'
-              type='text'
-              name='last-letter'
-              id='last-letter'
-              value={lastLetter}
-              onKeyDown={handleKeyDown}
-              onChange={handleChange}
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <>
+                  <SolutionLetters word={word} userLetters={userLetters} />
+                  <ErrorLetters word={word} userLetters={userLetters} />
+                  <Form
+                    lastLetter={lastLetter}
+                    handleKeyDown={handleKeyDown}
+                    handleChange={handleChange}
+                  />
+                </>
+              }
             />
-          </form>
+            <Route path='/options' element={<Options />} />
+            <Route path='/instructions' element={<Instructions />} />
+          </Routes>
         </section>
-        <Dummy 
-        numberOfErrors={getNumberOfErrors()}/>
+        <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
+      <Footer />
     </div>
   );
 }
